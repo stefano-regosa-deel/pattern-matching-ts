@@ -23,7 +23,7 @@ interface Two {
   }
 }
 
-type TaggedUnion = Zero | One | Two;
+type TaggedUnion = Zero | One | Two; 
 
 describe('pattern matching', () => {
   const optionMatching = match<O.Option<string>, string>({
