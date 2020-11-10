@@ -1,0 +1,59 @@
+{
+  "type": "module",
+  "name": "pattern-matching-ts",
+  "version": "1.0.0",
+  "description": "Pattern Matching in typescript",
+  "main": "lib/index.js",
+  "module": "es6/index.js",
+  "typings": "lib/index.d.ts",
+  "author": "Stefano Regosa",
+  "license": "MIT",
+  "scripts": {
+    "lint": "tslint -p .",
+    "jest-clear-cache": "jest --clearCache",
+    "prettier": "prettier --list-different \"./{src,test}/**/*.ts\"",
+    "fix-prettier": "prettier --write \"./{src,test}/**/*.ts\"",
+    "jest": "jest",
+    "test": "npm run lint && npm run prettier && npm run jest-clear-cache && npm run jest && npm run docs",
+    "clean": "rimraf ./dist",
+    "prebuild": "npm run clean",
+    "build": "tsc -p ./tsconfig.build.json && tsc -p ./tsconfig.build-es6.json && ts-node scripts/build",
+    "postbuild": "prettier --loglevel=silent --write \"./dist/**/*.ts\"",
+    "prepublishOnly": "ts-node scripts/pre-publish",
+    "doctoc": "doctoc README.md docs/introduction/code-conventions.md --title \"**Table of contents**\"",
+    "mocha": "mocha -r ts-node/register test/*.ts",
+    "dtslint": "dtslint dtslint",
+    "docs": "docs-ts",
+    "prerelease": "npm run build",
+    "release": "ts-node scripts/release"
+  },
+  "dependencies": {
+    "@babel/preset-typescript": "^7.12.1",
+    "assert": "^2.0.0",
+    "prettier": "^2.0.2",
+    "rimraf": "2.6.2",
+    "ts-jest": "^26.4.4",
+    "ts-node": "^8.0.2",
+    "tslint": "5.11.0",
+    "tslint-config-standard": "8.0.1",
+    "tslint-immutable": "^6.0.1",
+    "typescript": "^4.0.2"
+  },
+  "tags": [
+    "typescript",
+    "pattern-matching",
+    "functional-programming"
+  ],
+  "keywords": [
+    "typescript",
+    "pattern-matching",
+    "functional-programming"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "babel-jest": "^26.6.3",
+    "fp-ts": "^2.8.5",
+    "jest": "^26.6.3"
+  }
+}
