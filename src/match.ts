@@ -17,23 +17,34 @@ interface DefaultCase {
   readonly value: unknown
 }
 
-type A = { readonly _tag: string } | DefaultCase
+type A =
+  | {
+      readonly _tag: string
+      readonly value: any
+    }
+  | DefaultCase
 
 /**
- * Pattern Matching
+ * Pattern Maching function
  *
  * @example
- * import { match } from 'pattern-matching-ts/match'
+ * import * as M from 'pattern-matching-ts'
+ *
+ * const optionMatching = M.match<O.Option<string>, string>({
+ *   Some: (x) => x.value,
+ *   None: () => 'Nothing',
+ * })
  *
  *
- * assert.deepStrictEqual(1, 1)
+ * assert.deepStrictEqual(optionMatching(O.some('data')), 'data')
+ * assert.deepStrictEqual(optionMatching(O.none), 'Nothing')
  *
+ * @category pattern matching
  */
-
 export const match = <T extends Option<unknown> | A, R = unknown>(
   pattern: T extends Option<unknown>
     ? { [K in _Tag<T>]: (x: MatchingType<T, K>) => R }
     : {
         [K in _Tag<T> | DefaultCase['_tag']]: (x: MatchingType<T, K>) => R
       }
-): ((x: T) => R) => (x) => (pattern as any)['_tag' in x ? x._tag : '_'](x)
+): ((x: T) => R) => (x) => (pattern as any)[typeof x?._tag !== 'undefined' ? x._tag : '_'](x)
