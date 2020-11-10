@@ -1,7 +1,6 @@
 import * as assert from 'assert'
 import * as O from 'fp-ts/lib/Option'
-// import { match } from '../dist/lib/match'
-import { match } from '../src/match'
+import { match } from '../dist/lib/match'
 
 interface Zero {
   readonly _tag: 'Zero'
@@ -24,7 +23,7 @@ interface Two {
   }
 }
 
-type TaggedUnion = Zero | One | Two
+type TaggedUnion = Zero | One | Two;
 
 describe('pattern matching', () => {
   const optionMatching = match<O.Option<string>, string>({
@@ -41,8 +40,8 @@ describe('pattern matching', () => {
   it('Option', () => {
     assert.deepStrictEqual(optionMatching(O.some('data')), 'data')
   })
+
   it('match', () => {
-    matching({ _tag: 'One', value: 1 })
-    assert.deepStrictEqual(optionMatching(O.some('data')), 'data')
+    assert.deepStrictEqual(matching({ _tag: 'One', value: 1 }), 2)
   })
 })
