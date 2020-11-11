@@ -20,7 +20,7 @@ interface DefaultCase {
 type A =
   | {
       readonly _tag: string
-      readonly value: any
+      readonly value: unknown
     }
   | DefaultCase
 
@@ -41,10 +41,12 @@ type A =
  *
  * @category pattern matching
  */
-export const match = <T extends Option<unknown> | A, R = unknown>(
+export function match<T extends Option<unknown> | A, R = unknown>(
   pattern: T extends Option<unknown>
     ? { [K in _Tag<T>]: (x: MatchingType<T, K>) => R }
     : {
         [K in _Tag<T> | DefaultCase['_tag']]: (x: MatchingType<T, K>) => R
       }
-): ((x: T) => R) => (x) => (pattern as any)[typeof x?._tag !== 'undefined' ? x._tag : '_'](x)
+): (x: T) => R {
+  return (x) => (pattern as any)[typeof x?._tag !== 'undefined' ? x._tag : '_'](x)
+}
