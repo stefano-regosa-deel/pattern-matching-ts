@@ -18,7 +18,7 @@
 
 # Index
 
-- [Installation](#installation
+- [Installation](#installation)
 - [Usage](#usage)
   - [Option Monad Example](#option-example)
   - [Default Example](#default-example) 
