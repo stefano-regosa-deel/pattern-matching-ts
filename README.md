@@ -18,7 +18,7 @@
 
 # Index
 
-- [Installation](#installation)
+- [Installation](#installation
 - [Usage](#usage)
   - [Option Monad Example](#option-example)
   - [Default Example](#default-example) 
@@ -42,11 +42,22 @@ npm install --save pattern-matching-ts
 
 ### Option Monad Example
 
-```js
+```ts
 
 import * as M from 'pattern-matching-ts'
 
-const optionMatching = M.match<O.Option<string>, string>({
+interface None {
+  readonly _tag: 'None'
+}
+
+interface Some<A> {
+  readonly _tag: 'Some'
+  readonly value: A
+}
+
+type Option<A> = None | Some<A>
+
+const optionMatching = M.match<Option<string>, string>({
     Some: (x) => `Something: ${x.value}`,
     None: () => 'Nothing'
 })
@@ -57,7 +68,7 @@ assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
 
 ### Default Example
 
-```js
+```ts
 
 import * as M from 'pattern-matching-ts'
 
@@ -85,8 +96,9 @@ interface Write {
 }
 
 type Cases = ChangeColor<number> | Move | Write 
+
 const matchMessage = M.match<Cases, string>({
-    ChangeColor: ({ value: { r, g, b } }) => `Change the color to Red: ${r} | Green: ${g} | Blue: ${b}`,
+    ChangeColor: ({ value: { r, g, b } }) => `Red: ${r} | Green: ${g} | Blue: ${b}`,
     Move: ({ value: { x, y } }) => `Move in the x direction: ${x} and in the y direction: ${y}`,
     Write: ({ value: { text } }) => `Text message: ${text}`,
     _: () => 'Default message'
@@ -96,10 +108,7 @@ const ChangeColor = ({ r, g, b }: ChangeColor<number>['value']): ChangeColor<num
    _tag: 'ChangeColor', value: { r, g, b }
 })
 
-assert.deepStrictEqual(
-  matchMessage(ChangeColor({ r: 12, g: 20, b: 30 })),
-      'Change the color to Red: 12 | Green: 20 | Blue: 30'
-)
+assert.deepStrictEqual(matchMessage(ChangeColor({ r: 12, g: 20, b: 30 })),'Red: 12 | Green: 20 | Blue: 30')
 
 assert.deepStrictEqual(matchMessage(null), 'Default message')
 ```

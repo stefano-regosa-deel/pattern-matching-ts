@@ -30,7 +30,9 @@ type A =
  * @example
  * import * as M from 'pattern-matching-ts'
  *
- * const optionMatching = M.match<O.Option<string>, string>({
+ * type Option<A> = None | Some<A>
+ *
+ * const optionMatching = M.match<Option<string>, string>({
  *   Some: (x) => x.value,
  *   None: () => 'Nothing',
  * })
@@ -39,6 +41,7 @@ type A =
  * assert.deepStrictEqual(optionMatching(O.none), 'Nothing')
  *
  * type Cases = ChangeColor<number> | Move | Write
+ *
  * const matchMessage = M.match<Cases, string>({
  *   ChangeColor: ({ value: { r, g, b } }) => `Change the color to Red: ${r} | Green: ${g} | Blue: ${b}`,
  *   Move: ({ value: { x, y } }) => `Move in the x direction: ${x} and in the y direction: ${y}`,
