@@ -6,23 +6,23 @@ import * as M from '../src/match'
 interface ChangeColor<T = number> {
   readonly _tag: 'ChangeColor'
   readonly value: {
-    r: T
-    g: T
-    b: T
+    readonly r: T
+    readonly g: T
+    readonly b: T
   }
 }
 interface Move<T = number> {
   readonly _tag: 'Move'
   readonly value: {
-    x: T
-    y: T
+    readonly x: T
+    readonly y: T
   }
 }
 
 interface Write {
   readonly _tag: 'Write'
   readonly value: {
-    text: string
+    readonly text: string
   }
 }
 interface Quit {

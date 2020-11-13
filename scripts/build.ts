@@ -65,7 +65,7 @@ function makePkgJson(module: string): TE.TaskEither<Error, string> {
       {
         main: `../lib/${module}.js`,
         module: `../es6/${module}.js`,
-        typings: module === 'HKT' ? `../HKT.d.ts` : `../lib/${module}.d.ts`,
+        typings: `../lib/${module}.d.ts`,
         sideEffects: false
       },
       null,
@@ -78,7 +78,7 @@ function makePkgJson(module: string): TE.TaskEither<Error, string> {
 const main: Build<void> = pipe(
   copyPackageJson,
   RTE.chain(() => copyFiles),
-  RTE.chain(() => makeModules),
+  RTE.chain(() => makeModules)
 )
 
 run(
