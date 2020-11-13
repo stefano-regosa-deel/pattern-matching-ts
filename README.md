@@ -1,0 +1,105 @@
+<div align="center">
+  <img src="/img/pattern-matching-ts.png">
+</div>
+
+<h6 align="center">
+  Simple utility to do "pattern matching like"  in typescript.
+</h6>
+
+<p align="center">
+// todo testing  badges 
+</p>
+
+<br />
+
+
+
+# Index
+
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Option Monad Example](#option-example)
+  - [Default case Example](#default-example)
+- [License](#license)
+
+# Installation
+
+**yarn**
+
+```sh
+yarn add pattern-matching-ts
+```
+
+**npm**
+
+```sh
+npm install --save pattern-matching-ts
+```
+
+# Usage
+
+### Option Monad Example
+
+```js
+
+import * as M from 'pattern-matching-ts'
+
+const optionMatching = M.match<O.Option<string>, string>({
+    Some: (x) => `Something: ${x.value}`,
+    None: () => 'Nothing'
+  })
+
+ assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
+
+```
+
+### Default case Example
+
+```js
+
+import * as M from 'pattern-matching-ts'
+
+interface ChangeColor<T = number> {
+  readonly _tag: 'ChangeColor'
+  readonly value: {
+    readonly r: T
+    readonly g: T
+    readonly b: T
+  }
+}
+interface Move<T = number> {
+  readonly _tag: 'Move'
+  readonly value: {
+    readonly x: T
+    readonly y: T
+  }
+}
+
+interface Write {
+  readonly _tag: 'Write'
+  readonly value: {
+    readonly text: string
+  }
+}
+
+type Cases = ChangeColor<number> | Move | Write 
+const matchMessage = M.match<Cases, string>({
+    ChangeColor: ({ value: { r, g, b } }) => `Change the color to Red: ${r} | Green: ${g} | Blue: ${b}`,
+    Move: ({ value: { x, y } }) => `Move in the x direction: ${x} and in the y direction: ${y}`,
+    Write: ({ value: { text } }) => `Text message: ${text}`,
+    _: () => 'Default message'
+})
+
+const ChangeColor = ({ r, g, b }: ChangeColor<number>['value']): ChangeColor<number> => ({
+   _tag: 'ChangeColor', value: { r, g, b }
+})
+assert.deepStrictEqual(
+  matchMessage(ChangeColor({ r: 12, g: 20, b: 30 })),
+      'Change the color to Red: 12 | Green: 20 | Blue: 30'
+    )
+
+```
+
+
+
+[MIT](/LICENSE.md)

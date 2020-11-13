@@ -25,7 +25,7 @@ type A =
   | DefaultCase
 
 /**
- * Pattern Maching function
+ * Pattern Maching
  *
  * @example
  * import * as M from 'pattern-matching-ts'
@@ -35,11 +35,20 @@ type A =
  *   None: () => 'Nothing',
  * })
  *
- *
  * assert.deepStrictEqual(optionMatching(O.some('data')), 'data')
  * assert.deepStrictEqual(optionMatching(O.none), 'Nothing')
  *
- * @category pattern matching
+ * type Cases = ChangeColor<number> | Move | Write
+ * const matchMessage = M.match<Cases, string>({
+ *   ChangeColor: ({ value: { r, g, b } }) => `Change the color to Red: ${r} | Green: ${g} | Blue: ${b}`,
+ *   Move: ({ value: { x, y } }) => `Move in the x direction: ${x} and in the y direction: ${y}`,
+ *   Write: ({ value: { text } }) => `Text message: ${text}`,
+ *   _: () => 'Default message'
+ * })
+ *
+ * assert.deepStrictEqual(matchMessage(ChangeColor({ r: 12, g: 20, b: 30 })),'Change the color to Red: 12 | Green: 20 | Blue: 30')
+ * assert.deepStrictEqual(matchMessage(Move({ x: 500, y: 100 })),'Move in the x direction: 500 and in the y direction: 100')
+ *
  */
 export function match<T extends Option<unknown> | A, R = unknown>(
   pattern: T extends Option<unknown>

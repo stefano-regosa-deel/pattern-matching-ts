@@ -1,6 +1,5 @@
 import * as assert from 'assert'
 import * as O from 'fp-ts/lib/Option'
-// import * as M from '../dist/lib/match'
 import * as M from '../src/match'
 
 interface ChangeColor<T = number> {
@@ -25,10 +24,6 @@ interface Write {
     readonly text: string
   }
 }
-interface Quit {
-  readonly _tag: 'Quit'
-  readonly value: string
-}
 
 describe('pattern matching', () => {
   const optionMatching = M.match<O.Option<string>, string>({
@@ -36,12 +31,11 @@ describe('pattern matching', () => {
     None: () => 'Nothing'
   })
 
-  type Cases = ChangeColor<number> | Move | Write | Quit
+  type Cases = ChangeColor<number> | Move | Write
   const matchMessage = M.match<Cases, string>({
     ChangeColor: ({ value: { r, g, b } }) => `Change the color to Red: ${r} | Green: ${g} | Blue: ${b}`,
     Move: ({ value: { x, y } }) => `Move in the x direction: ${x} and in the y direction: ${y}`,
     Write: ({ value: { text } }) => `Text message: ${text}`,
-    Quit: () => 'Quit variant have no data structure',
     _: () => 'Default message'
   })
 
@@ -55,24 +49,31 @@ describe('pattern matching', () => {
       _tag: 'ChangeColor',
       value: { r, g, b }
     })
+    assert.deepStrictEqual(
+      matchMessage(ChangeColor({ r: 12, g: 20, b: 30 })),
+      'Change the color to Red: 12 | Green: 20 | Blue: 30'
+    )
+
     const Move = ({ x, y }: Move['value']): Move => ({
       _tag: 'Move',
       value: { x, y }
     })
     assert.deepStrictEqual(
-      matchMessage(ChangeColor({ r: 12, g: 20, b: 30 })),
-      'Change the color to Red: 12 | Green: 20 | Blue: 30'
-    )
-    assert.deepStrictEqual(
       matchMessage(Move({ x: 500, y: 100 })),
       'Move in the x direction: 500 and in the y direction: 100'
     )
+
+    const Write = ({ text }: Write['value']): Write => ({
+      _tag: 'Write',
+      value: { text }
+    })
+    assert.deepStrictEqual(matchMessage(Write({ text: 'my message' })), 'Text message: my message')
   })
 
   it('match default', () => {
-    //@ts-ignore
+    // @ts-ignore
     assert.deepStrictEqual(matchMessage(null), 'Default message')
-    //@ts-ignore
+    // @ts-ignore
     assert.deepStrictEqual(matchMessage(), 'Default message')
   })
 })
