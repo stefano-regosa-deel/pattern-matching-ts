@@ -2,12 +2,14 @@
   <img src="/img/pattern-matching-ts.png">
 </div>
 
-<h6 align="center">
-  Simple utility to do "pattern matching like"  in typescript.
-</h6>
+<h4 align="center">
+  Pattern matching in typescript.
+</h4>
 
 <p align="center">
-// todo testing  badges 
+  <a href="https://github.com/nrdlab/pattern-matching-ts/actions?query=workflow%3ACI">
+   <img src="https://img.shields.io/badge/build-passing-green">
+  <a>
 </p>
 
 <br />
@@ -19,7 +21,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
   - [Option Monad Example](#option-example)
-  - [Default case Example](#default-example)
+  - [Default Example](#default-example) 
 - [License](#license)
 
 # Installation
@@ -47,13 +49,13 @@ import * as M from 'pattern-matching-ts'
 const optionMatching = M.match<O.Option<string>, string>({
     Some: (x) => `Something: ${x.value}`,
     None: () => 'Nothing'
-  })
+})
 
- assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
+assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
 
 ```
 
-### Default case Example
+### Default Example
 
 ```js
 
@@ -71,7 +73,7 @@ interface Move<T = number> {
   readonly _tag: 'Move'
   readonly value: {
     readonly x: T
-    readonly y: T
+    readonly y: T 
   }
 }
 
@@ -93,11 +95,13 @@ const matchMessage = M.match<Cases, string>({
 const ChangeColor = ({ r, g, b }: ChangeColor<number>['value']): ChangeColor<number> => ({
    _tag: 'ChangeColor', value: { r, g, b }
 })
+
 assert.deepStrictEqual(
   matchMessage(ChangeColor({ r: 12, g: 20, b: 30 })),
       'Change the color to Red: 12 | Green: 20 | Blue: 30'
-    )
+)
 
+assert.deepStrictEqual(matchMessage(null), 'Default message')
 ```
 
 
