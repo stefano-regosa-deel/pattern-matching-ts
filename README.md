@@ -3,14 +3,28 @@
 </div>
 
 <h4 align="center">
-  Pattern matching in typescript.
+  <strong>Pattern matching</strong> in <strong>Typescript</strong>.
 </h4>
+
+<p>
+  <strong>Pattern Matching</strong> is a declarative much more powerful and less verbose alternative to imperatives <i>"if/else"</i> conditions.<br/>
+  In <strong>Functional Programming languages</strong>, there're built-in keywords for <strong>Pattern Matching</strong>. <strong>Typescript</strong> though is one language that works very well with <strong>Functional Programming</strong> but lacks this feature.<br/>
+The aim of this package is to bring the <strong>Pattern Matching</strong> feature to <strong>Typescript</strong> through <strong>Discriminated Union Types</strong> and <strong>Algebraic Data Types</strong>.
+</p>
 
 <p align="center">
   <a href="https://github.com/nrdlab/pattern-matching-ts/actions?query=workflow%3ACI">
    <img src="https://img.shields.io/badge/build-passing-green">
   <a>
+  <a href="https://www.npmjs.com/package/pattern-matching-ts">
+    <img src="https://badge.fury.io/js/ts-pattern.svg" alt="npm version" >
+  </a>
+  <a href="https://github.com/nrdlab/pattern-matching-ts">
+    <img src="https://img.shields.io/badge/coverage-100%25-brightgreen" >
+  </a>
 </p>
+
+
 
 <br />
 
