@@ -8,9 +8,12 @@
 
 <p>
   <strong>Pattern Matching</strong> is a declarative much more powerful and less verbose alternative to imperatives <i>"if/else"</i> conditions.<br/>
+  A definition can be found inside <a href="https://docs.scala-lang.org/tour/pattern-matching.html"><strong>Scala Documentation</strong></a><br><br>
+<i>“Pattern matching tests whether a given value (or sequence of values) has the shape defined by a pattern, and, if it does, binds the variables in the pattern to the corresponding components of the value (or sequence of values).”</i><br><br>
   In <strong>Functional Programming languages</strong>, there're built-in keywords for <strong>Pattern Matching</strong>. <strong>Typescript</strong> though is one language that works very well with <strong>Functional Programming</strong> but lacks this feature.<br/>
-The aim of this package is to bring the <strong>Pattern Matching</strong> feature to <strong>Typescript</strong> through <strong>Discriminated Union Types</strong> and <strong>Algebraic Data Types</strong>.
+This package aims to bring <strong>Pattern Matching</strong> feature to <strong>Typescript</strong> through <strong>Discriminated Union Types</strong> / <strong>Algebraic Data Types</strong>.
 </p>
+
 
 <p align="center">
   <a href="https://github.com/nrdlab/pattern-matching-ts/actions?query=workflow%3ACI">
