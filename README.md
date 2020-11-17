@@ -131,5 +131,8 @@ assert.deepStrictEqual(matchMessage(null), 'Default message')
 ```
 
 
+Here's a blog post that introduces the API. 👉
+[Pattern Matching in Typescript](https://dev.to/stefano_regosa/typescript-pattern-matching-ne8)
+
 
 [MIT](/LICENSE.md)
