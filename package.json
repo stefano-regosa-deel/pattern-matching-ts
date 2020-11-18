@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "pattern-matching-ts",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Pattern Matching in typescript",
   "main": "lib/index.js",
   "module": "es6/index.js",
