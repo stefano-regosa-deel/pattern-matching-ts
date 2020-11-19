@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="/img/pattern-matching-ts.png">
+  <img src="https://github.com/nrdlab/pattern-matching-ts/blob/master/img/pattern-matching-ts.png?raw=true">
 </div>
 
 <h4 align="center">
@@ -60,8 +60,7 @@ npm install --save pattern-matching-ts
 ### Option Monad Example
 
 ```ts
-
-import * as M from 'pattern-matching-ts'
+import * as M from 'pattern-matching-ts/lib/match'
 
 interface None {
   readonly _tag: 'None'
@@ -86,8 +85,7 @@ assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
 ### Default Example
 
 ```ts
-
-import * as M from 'pattern-matching-ts'
+import * as M from 'pattern-matching-ts/lib/match'
 
 interface ChangeColor<T = number> {
   readonly _tag: 'ChangeColor'
