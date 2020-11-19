@@ -3,6 +3,7 @@
  *
  */
 import * as match from './match'
+
 /**
  * @since 1.0.2
  *
