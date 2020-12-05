@@ -17,7 +17,6 @@ interface Move<T = number> {
     readonly y: T
   }
 }
-
 interface Write {
   readonly _tag: 'Write'
   readonly value: {
@@ -71,9 +70,7 @@ describe('pattern matching', () => {
   })
 
   it('match default', () => {
-    // @ts-ignore
-    assert.deepStrictEqual(matchMessage(null), 'Default message')
-    // @ts-ignore
-    assert.deepStrictEqual(matchMessage(), 'Default message')
+    assert.deepStrictEqual(matchMessage((null as unknown) as ChangeColor), 'Default message')
+    assert.deepStrictEqual(matchMessage((undefined as unknown) as ChangeColor), 'Default message')
   })
 })

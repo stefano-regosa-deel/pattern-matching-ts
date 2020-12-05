@@ -1,34 +1,39 @@
-type _Tag<T extends { readonly _tag: string }> = T['_tag']
-type MatchingType<T, Type extends string> = Extract<T, { readonly _tag: Type }>
-
 interface None {
   readonly _tag: 'None'
 }
-
 interface Some<A> {
   readonly _tag: 'Some'
   readonly value: A
 }
 
-type Option<A> = None | Some<A>
+export type Option<A> = None | Some<A>
 
+export interface Left<E> {
+  readonly _tag: 'Left'
+  readonly left: E
+}
+
+export interface Right<A> {
+  readonly _tag: 'Right'
+  readonly right: A
+}
+
+export type Either<E, A> = Left<E> | Right<A>
+
+const DEFAULT = '_'
 interface DefaultCase {
-  readonly _tag: '_'
+  readonly _tag: typeof DEFAULT
   readonly value: unknown
 }
 
-type A =
-  | {
-      readonly _tag: string
-      readonly value: unknown
-    }
-  | DefaultCase
+type _Tag<T extends { readonly _tag: string }> = T['_tag']
+type MatchingType<T, Type extends string> = Extract<T, { readonly _tag: Type }>
 
 /**
  * Pattern Maching
  *
  * @example
- * import * as M from 'pattern-matching-ts'
+ * import * as M from 'pattern-matching-ts/lib/match'
  *
  * type Option<A> = None | Some<A>
  *
@@ -53,12 +58,13 @@ type A =
  * assert.deepStrictEqual(matchMessage(Move({ x: 500, y: 100 })),'Move in the x direction: 500 and in the y direction: 100')
  *
  */
-export function match<T extends Option<unknown> | A, R = unknown>(
+type Monad = Option<unknown> | Either<unknown, unknown>
+export function match<T extends Monad | DefaultCase | { readonly _tag: string; readonly value: unknown }, R = unknown>(
   pattern: T extends Option<unknown>
     ? { [K in _Tag<T>]: (x: MatchingType<T, K>) => R }
     : {
         [K in _Tag<T> | DefaultCase['_tag']]: (x: MatchingType<T, K>) => R
       }
 ): (x: T) => R {
-  return (x) => (pattern as any)[typeof x?._tag !== 'undefined' ? x._tag : '_'](x)
+  return (x) => (pattern as any)[x?._tag ?? DEFAULT](x)
 }

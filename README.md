@@ -60,8 +60,7 @@ npm install --save pattern-matching-ts
 ### Option Monad Example
 
 ```ts
-
-import * as M from 'pattern-matching-ts'
+import * as M from 'pattern-matching-ts/lib/match'
 
 interface None {
   readonly _tag: 'None'
@@ -86,8 +85,7 @@ assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
 ### Default Example
 
 ```ts
-
-import * as M from 'pattern-matching-ts'
+import * as M from 'pattern-matching-ts/lib/match'
 
 interface ChangeColor<T = number> {
   readonly _tag: 'ChangeColor'
@@ -130,6 +128,9 @@ assert.deepStrictEqual(matchMessage(ChangeColor({ r: 12, g: 20, b: 30 })),'Red: 
 assert.deepStrictEqual(matchMessage(null), 'Default message')
 ```
 
+
+Here's a blog post that introduces the API. 👉
+[Pattern Matching in Typescript](https://dev.to/stefano_regosa/typescript-pattern-matching-ne8)
 
 
 [MIT](/LICENSE.md)
