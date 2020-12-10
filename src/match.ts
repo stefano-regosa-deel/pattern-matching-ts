@@ -8,18 +8,6 @@ interface Some<A> {
 
 export type Option<A> = None | Some<A>
 
-export interface Left<E> {
-  readonly _tag: 'Left'
-  readonly left: E
-}
-
-export interface Right<A> {
-  readonly _tag: 'Right'
-  readonly right: A
-}
-
-export type Either<E, A> = Left<E> | Right<A>
-
 const DEFAULT = '_'
 interface DefaultCase {
   readonly _tag: typeof DEFAULT
@@ -58,8 +46,13 @@ type MatchingType<T, Type extends string> = Extract<T, { readonly _tag: Type }>
  * assert.deepStrictEqual(matchMessage(Move({ x: 500, y: 100 })),'Move in the x direction: 500 and in the y direction: 100')
  *
  */
-type Monad = Option<unknown> | Either<unknown, unknown>
-export function match<T extends Monad | DefaultCase | { readonly _tag: string; readonly value: unknown }, R = unknown>(
+
+type X = 'left' | 'right' | 'value'
+type Match = {
+  readonly [k in X]?: unknown
+} & { readonly _tag: string }
+
+export function match<T extends Match | DefaultCase, R = unknown>(
   pattern: T extends Option<unknown>
     ? { [K in _Tag<T>]: (x: MatchingType<T, K>) => R }
     : {

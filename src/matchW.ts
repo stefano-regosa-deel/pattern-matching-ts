@@ -3,7 +3,7 @@ interface DefaultCase {
   readonly [DEFAULT]: () => unknown
 }
 
-type Match<A, _Tag extends string, k, R> = (p: Extract<A, { [_tag in _Tag]: k }>) => R
+type Match<A, _Tag extends string, X, R> = (p: Extract<A, { [_tag in _Tag]: X }>) => R
 /**
  * A Wider pipeable Pattern Maching Implementation
  *
@@ -21,6 +21,19 @@ type Match<A, _Tag extends string, k, R> = (p: Extract<A, { [_tag in _Tag]: k }>
  *   assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
  *   assert.deepStrictEqual(optionMatching(O.none), 'Nothing')
  *
+ * interface ServerResponse<Code extends string | number> {
+ *  readonly code: Code
+ * }
+ *
+ * interface Success extends ServerResponse<200> {
+ *  readonly response: {
+ *     readonly body: unknown
+ *  }
+ * }
+ *
+ * interface Failure extends ServerResponse<404 | 500> {
+ *  readonly detail?: unknown
+ * }
  *  const matchResponse = (response: Success | Failure) =>
  *   pipe(
  *     response,
@@ -39,8 +52,8 @@ export const matchW: <_Tag extends string>(
   _tag: _Tag
 ) => {
   <
-    A extends { [k in _Tag]: string | number | typeof DEFAULT },
-    K extends { [k in A[_Tag]]: Match<A, _Tag, k, unknown> }
+    A extends { [X in _Tag]: string | number | typeof DEFAULT },
+    K extends { [X in A[_Tag]]: Match<A, _Tag, X, unknown> }
   >(
     k: K
   ): (match: A) => ReturnType<K[keyof K]> | DefaultCase
