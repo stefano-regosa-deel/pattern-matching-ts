@@ -1,10 +1,28 @@
-import * as assert from 'assert'
+import assert from 'assert'
 import { pipe } from 'fp-ts/lib/function'
 import * as O from 'fp-ts/lib/Option'
 import * as E from 'fp-ts/lib/Either'
 import * as M from '../src/matchW'
 
 describe('pattern matching pipeble', () => {
+  interface ServerResponse<Code extends string | number> {
+    readonly code: Code
+  }
+
+  interface Response<Body> {
+    readonly response: {
+      readonly body: Body
+    }
+  }
+  interface Success extends ServerResponse<200>, Response<ReadonlyArray<string>> {}
+
+  interface NotFoundError extends ServerResponse<404> {}
+  interface ServerError extends ServerResponse<500> {
+    readonly detail: string
+  }
+
+  type Responses = Success | NotFoundError | ServerError
+
   const optionMatching = (o: O.Option<string>) =>
     pipe(
       o,
@@ -35,8 +53,7 @@ describe('pattern matching pipeble', () => {
     E.left('RGB color values not found'),
     M.matchW('_tag')({
       Right: ({ right: { r, g, b } }) => `Red: ${r} | Green: ${g} | Blue: ${b}`,
-      Left: ({ left }) => 'Error: ' + left,
-      _: () => 'ok'
+      Left: ({ left }) => 'Error: ' + left
     })
   )
 
@@ -45,42 +62,29 @@ describe('pattern matching pipeble', () => {
     assert.deepStrictEqual(eitherMatchingLeft, 'Error: RGB color values not found')
   })
 
-  interface ServerResponse<Code extends string | number> {
-    readonly code: Code
-  }
-
-  interface Success extends ServerResponse<200> {
-    readonly response: {
-      readonly body: unknown
-    }
-  }
-
-  interface Failure extends ServerResponse<404 | 500> {
-    readonly detail?: unknown
-  }
-
-  const matchResponse = (response: Success | Failure) =>
+  const matchResponse = (response: Responses) =>
     pipe(
       response,
       M.matchW('code')({
+        500: ({ detail }) => ({ message: 'Internal server error', detail }),
+        404: () => ({ message: 'The page cannot be found!' }),
         200: ({ response }) => response.body,
-        404: () => 'The page cannot be found!',
-        500: ({ detail }) => `Internal server error: ${detail}`,
         _: () => 'Unexpected response'
       })
     )
 
-  it('match reponse', () => {
-    assert.deepStrictEqual(matchResponse({ code: 200, response: { body: 'data' } }), 'data')
-    assert.deepStrictEqual(
-      matchResponse({ code: 500, detail: 'Cannot connect to the database' }),
-      'Internal server error: Cannot connect to the database'
-    )
-    assert.deepStrictEqual(matchResponse({ code: 404 }), 'The page cannot be found!')
+  it('Response', () => {
+    assert.deepStrictEqual(matchResponse({ code: 200, response: { body: ['data'] } }), ['data'])
+    assert.deepStrictEqual(matchResponse({ code: 500, detail: 'Cannot connect to the database' }), {
+      message: 'Internal server error',
+      detail: 'Cannot connect to the database'
+    })
+    assert.deepStrictEqual(matchResponse({ code: 404 }), { message: 'The page cannot be found!' })
   })
+
   it('Default', () => {
-    assert.deepStrictEqual(matchResponse((null as unknown) as Failure), 'Unexpected response')
-    assert.deepStrictEqual(matchResponse((undefined as unknown) as Failure), 'Unexpected response')
-    assert.deepStrictEqual(matchResponse(({ code: '_', value: '' } as unknown) as Failure), 'Unexpected response')
+    assert.deepStrictEqual(matchResponse((null as unknown) as ServerError), 'Unexpected response')
+    assert.deepStrictEqual(matchResponse((undefined as unknown) as ServerError), 'Unexpected response')
+    assert.deepStrictEqual(matchResponse(({ code: '_', value: '' } as unknown) as ServerError), 'Unexpected response')
   })
 })

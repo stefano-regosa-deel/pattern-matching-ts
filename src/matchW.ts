@@ -10,43 +10,36 @@ type Match<A, _Tag extends string, X, R> = (p: Extract<A, { [_tag in _Tag]: X }>
  * @example
  * import * as M from 'pattern-matching-ts/lib/matchW'
  *
- * const optionMatching = (o: O.Option<string>) => pipe(
+ * const optionMatching = (o: O.Option<string>) =>
+ *    pipe(
  *      o,
  *      M.matchW('_tag')({
  *       Some: ({ value }) => 'Something: ' + value,
  *       None: () => 'Nothing',
- *     })
- *  )
+ *     }))
  *
  *   assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
  *   assert.deepStrictEqual(optionMatching(O.none), 'Nothing')
  *
- * interface ServerResponse<Code extends string | number> {
- *  readonly code: Code
- * }
- *
- * interface Success extends ServerResponse<200> {
- *  readonly response: {
- *     readonly body: unknown
- *  }
- * }
- *
- * interface Failure extends ServerResponse<404 | 500> {
- *  readonly detail?: unknown
- * }
- *  const matchResponse = (response: Success | Failure) =>
+ * const matchResponse = (response: Responses) =>
  *   pipe(
  *     response,
  *     M.matchW('code')({
- *       200: ({ response }) => response.body,
- *       404: () => 'The page cannot be found!',
- *       500: ({ detail }) => `Internal server error: ${detail}`,
- *       _: () => 'Unexpected response'
- *    })
+ *        500: ({ detail }) => ({ message: 'Internal server error', detail }),
+ *        404: () => ({ message: 'The page cannot be found!' }),
+ *        200: ({ response }) => response.body,
+ *        _: () => 'Unexpected response'
+ *     })
  *   )
  *
- *   assert.deepStrictEqual(matchResponse({ code: 200, response: { body: 'data' } }), 'data')
- *   assert.deepStrictEqual(matchResponse({ code: 404 }), 'The page cannot be found!')
+ * it('Response', () => {
+ *   assert.deepStrictEqual(matchResponse({ code: 200, response: { body: ['data'] } }), ['data'])
+ *   assert.deepStrictEqual(matchResponse({ code: 500, detail: 'Cannot connect to the database' }), {
+ *     message: 'Internal server error',
+ *     detail: 'Cannot connect to the database'
+ *   })
+ *   assert.deepStrictEqual(matchResponse({ code: 404 }), { message: 'The page cannot be found!' })
+ * })
  */
 export const matchW: <_Tag extends string>(
   _tag: _Tag
