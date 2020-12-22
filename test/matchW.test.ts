@@ -40,7 +40,14 @@ describe('pattern matching pipeble', () => {
     assert.deepStrictEqual(optionMatching((null as unknown) as O.None), 'Default')
     assert.deepStrictEqual(optionMatching(('' as unknown) as O.None), 'Default')
   })
-
+  type RGB = Record<'r' | 'g' | 'b',string>
+  const either = (maybeRgb: E.Either<string,RGB>) => pipe(
+    maybeRgb,
+    M.matchW('_tag')({
+      Left: ({ left }) => 'Error: ' + left,
+      Right: ({ right: { r, g, b } }) => `Red: ${r} | Green: ${g} | Blue: ${b}`
+    })
+  )
   const eitherMatchingRight = pipe(
     E.right({ r: 255, g: 255, b: 0 }),
     M.matchW('_tag')({
