@@ -155,7 +155,7 @@ assert.deepStrictEqual(matchResponse({ code: 404 }), { message: 'The page cannot
 
 **_Match_**
 
-> ### Option Match Example
+> ### Option Match 
 
 ```ts
 import * as M from 'pattern-matching-ts/lib/match'
