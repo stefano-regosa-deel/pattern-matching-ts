@@ -2,7 +2,7 @@ import assert from 'assert'
 import { pipe } from 'fp-ts/lib/function'
 import * as O from 'fp-ts/lib/Option'
 import * as E from 'fp-ts/lib/Either'
-import * as M from '../src/matchW'
+import * as M from '../src/match'
 
 describe('pattern matching pipeble', () => {
   interface ServerResponse<Code extends string | number> {
@@ -40,21 +40,15 @@ describe('pattern matching pipeble', () => {
     assert.deepStrictEqual(optionMatching((null as unknown) as O.None), 'Default')
     assert.deepStrictEqual(optionMatching(('' as unknown) as O.None), 'Default')
   })
-  type RGB = Record<'r' | 'g' | 'b',string>
-  const either = (maybeRgb: E.Either<string,RGB>) => pipe(
-    maybeRgb,
-    M.matchW('_tag')({
-      Left: ({ left }) => 'Error: ' + left,
-      Right: ({ right: { r, g, b } }) => `Red: ${r} | Green: ${g} | Blue: ${b}`
-    })
-  )
-  const eitherMatchingRight = pipe(
-    E.right({ r: 255, g: 255, b: 0 }),
-    M.matchW('_tag')({
-      Right: ({ right: { r, g, b } }) => `Red: ${r} | Green: ${g} | Blue: ${b}`,
-      Left: ({ left }) => 'Error: ' + left
-    })
-  )
+  type RGB = Record<'r' | 'g' | 'b', number>
+  const either = (maybeRgb: E.Either<string, RGB>) =>
+    pipe(
+      maybeRgb,
+      M.matchW('_tag')({
+        Left: ({ left }) => 'Error: ' + left,
+        Right: ({ right: { r, g, b } }) => `Red: ${r} | Green: ${g} | Blue: ${b}`
+      })
+    )
 
   const eitherMatchingLeft = pipe(
     E.left('RGB color values not found'),
@@ -65,7 +59,7 @@ describe('pattern matching pipeble', () => {
   )
 
   it('Either', () => {
-    assert.deepStrictEqual(eitherMatchingRight, 'Red: 255 | Green: 255 | Blue: 0')
+    assert.deepStrictEqual(either(E.right({ r: 255, g: 255, b: 0 })), 'Red: 255 | Green: 255 | Blue: 0')
     assert.deepStrictEqual(eitherMatchingLeft, 'Error: RGB color values not found')
   })
 
