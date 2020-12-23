@@ -6,7 +6,7 @@
   "main": "lib/index.js",
   "module": "es6/index.js",
   "typings": "lib/index.d.ts",
-  "author": "Stefano Regosa",
+  "author": "Stefano Regosa <regosas@gmail.com>",
   "license": "MIT",
   "scripts": {
     "lint": "tslint -p .",
@@ -34,7 +34,8 @@
   "keywords": [
     "typescript",
     "pattern-matching",
-    "functional-programming"
+    "functional-programming",
+    "fp-ts"
   ],
   "devDependencies": {
     "@babel/preset-typescript": "^7.12.1",
