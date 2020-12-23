@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/nrdlab/pattern-matching-ts/blob/master/img/pattern-matching-ts.png?raw=true">
+  <img src="https://github.com/nrdlab/pattern-matching-ts/blob/matchW/img/pattern-matching-ts.png?raw=true">
 </div>
 
 <h4 align="center">
