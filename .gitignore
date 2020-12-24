@@ -2,6 +2,5 @@
 node_modules
 /dist
 dev
-coverage
 docs-examples
 pattern-matching-ts-1.0.1.tar.gz
