@@ -21,7 +21,7 @@ This package aims to bring <strong>Pattern Matching</strong> feature to <strong>
   <a href="https://www.npmjs.com/package/pattern-matching-ts">
     <img src="https://badge.fury.io/js/ts-pattern.svg" alt="npm version" >
   </a>
-  <a href="https://github.com/nrdlab/pattern-matching-ts">
+  <a href="https://app.codecov.io/gh/nrdlab/pattern-matching-ts/branch/matchW">
     <img src="https://img.shields.io/badge/coverage-100%25-brightgreen" >
   </a>
 </p>
