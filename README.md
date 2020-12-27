@@ -15,8 +15,15 @@ This package aims to bring <strong>Pattern Matching</strong> feature to <strong>
 </p>
 
 <p align="center">
+  <img alt="npm" src="https://img.shields.io/npm/v/pattern-matching-ts?color=green&logo=yarn&logoColor=white&style=flat-square">
+      <a href="https://codecov.io/gh/nrdlab/pattern-matching-ts">
+        <img src="https://codecov.io/gh/nrdlab/pattern-matching-ts/branch/matchW/graph/badge.svg?token=1V23E6VDHN"/>
+      </a>
+<a href="https://github.com/nrdlab/pattern-matching-ts/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/nrdlab/pattern-matching-ts?style=flat-square"></a>
+<a href="https://github.com/nrdlab/pattern-matching-ts/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/nrdlab/pattern-matching-ts?color=green&style=flat-square"></a>
+<a href="https://github.com/nrdlab/pattern-matching-ts/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/nrdlab/pattern-matching-ts?color=green&style=flat-square"></a>
   <a href="https://github.com/nrdlab/pattern-matching-ts/actions?query=workflow%3ACI">
-   <img src="https://img.shields.io/badge/build-passing-green">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/nrdlab/pattern-matching-ts/CI?style=flat-square">
   <a>
   <a href="https://www.npmjs.com/package/pattern-matching-ts">
     <img src="https://badge.fury.io/js/ts-pattern.svg" alt="npm version" >
