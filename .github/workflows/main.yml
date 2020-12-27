@@ -26,8 +26,18 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node_version }}
-
+    
+    - name: Codecov
+      uses: codecov/codecov-action@v1.1.1
+      with:
+        flags: unittests # optional
+        name: codecov-umbrella # optional
+        fail_ci_if_error: true # optional (default = false)
+      
     - name: npm install, build and test
       run: |
         npm install
         npm test
+    
+        
+        
