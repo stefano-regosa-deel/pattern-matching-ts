@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/nrdlab/pattern-matching-ts/blob/matchW/img/pattern-matching-ts.png?raw=true">
+  <img src="https://github.com/nrdlab/pattern-matching-ts/blob/master/img/pattern-matching-ts.png?raw=true">
 </div>
 
 <h4 align="center">
@@ -17,7 +17,7 @@ This package aims to bring <strong>Pattern Matching</strong> feature to <strong>
 <p align="center">
   <img alt="npm" src="https://img.shields.io/npm/v/pattern-matching-ts?color=green&logo=yarn&logoColor=white&style=flat-square">
       <a href="https://codecov.io/gh/nrdlab/pattern-matching-ts">
-        <img src="https://codecov.io/gh/nrdlab/pattern-matching-ts/branch/matchW/graph/badge.svg?token=1V23E6VDHN"/>
+        <img src="https://codecov.io/gh/nrdlab/pattern-matching-ts/branch/master/graph/badge.svg?token=1V23E6VDHN"/>
       </a>
 <a href="https://github.com/nrdlab/pattern-matching-ts/blob/master/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/nrdlab/pattern-matching-ts?style=flat-square"></a>
 <a href="https://github.com/nrdlab/pattern-matching-ts/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/nrdlab/pattern-matching-ts?color=green&style=flat-square"></a>
@@ -28,7 +28,7 @@ This package aims to bring <strong>Pattern Matching</strong> feature to <strong>
   <a href="https://www.npmjs.com/package/pattern-matching-ts">
     <img src="https://badge.fury.io/js/ts-pattern.svg" alt="npm version" >
   </a>
-  <a href="https://app.codecov.io/gh/nrdlab/pattern-matching-ts/branch/matchW">
+  <a href="https://app.codecov.io/gh/nrdlab/pattern-matching-ts/branch/master">
     <img src="https://img.shields.io/badge/coverage-100%25-brightgreen" >
   </a>
 </p>
