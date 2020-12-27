@@ -1,6 +1,5 @@
-In the latest article, we talked about pattern matching
-[Match](https://dev.to/stefano_regosa/typescript-pattern-matching-ne8) API.
-
+In the latest post, we saw how to use the pattern-matching
+[match](https://dev.to/stefano_regosa/typescript-pattern-matching-ne8) API.
  
 In this article we gonna look into the `matchW` API , a wider match implementation where the match happens within a `pipe` function.
 
@@ -23,8 +22,7 @@ npm install --save fp-ts
 ```
 
 # MatchW
-With this api we don't need to specify via generic the matches or return type since both signatures are inferred within the pipe function.
-The only thing we have to specify in order to implement our pattern matching function is the discriminated union.
+With this api we don't need to specify via generic the match cases or return type since both signatures are inferred within the pipe function.The only thing we have to specify in order to implement our pattern matching is the discriminated union.
 
 Let's implement our `matchW` pattern-matching against the `fp-ts`  `Option`.
 
@@ -47,15 +45,16 @@ we see that the convention used was `_tag`, so we have to specify that inside ou
 ```ts 
 M.matchW('_tag')
 ```
-Once we did that, the [LSP](https://langserver.org/) auto-complete will do the rest by providing suggestions via intellisense:
+Once we do that, the [LSP](https://langserver.org/) auto-complete will do the rest by providing suggestions:
 
 for each case
-![alt MatchW](img/b.png)
+![alt MatchW](https://raw.githubusercontent.com/nrdlab/pattern-matching-ts/matchW/docs/img/a.png)
 
 and each implementation
-![alt MatchW](img/a.png)
 
+![alt MatchW](https://raw.githubusercontent.com/nrdlab/pattern-matching-ts/matchW/docs/img/b.png)
 
+so the option matching will look like this. 
 ### Option MatchW
 
 ```ts
@@ -99,7 +98,7 @@ assert.deepStrictEqual(either(E.right({ r: 255, g: 255, b: 0 })), 'Red: 255 | Gr
 ```
 
 
-Since the `matchW` discriminated union can extend also number let's see how we can implement a pattern-matching against HTTP codes 
+Since the `matchW` discriminated union can extend also number let's see how we can implement a pattern-matching against `HTTP` codes. 
 
 ```ts
 import * as M from 'pattern-matching-ts/lib/match'
