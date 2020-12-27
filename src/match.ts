@@ -8,7 +8,7 @@ interface Some<A> {
 }
 
 export type Option<A> = None | Some<A>
-  
+
 interface DefaultCase {
   readonly _tag: typeof DEFAULT
   readonly value: unknown
