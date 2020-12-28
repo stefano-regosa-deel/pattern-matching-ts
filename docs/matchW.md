@@ -50,10 +50,11 @@ M.matchW('_tag')
 Once we did that, the [LSP](https://langserver.org/) auto-complete will do the rest by providing suggestions via intellisense:
 
 for each case
-![alt MatchW](img/b.png)
+![alt MatchW](https://github.com/nrdlab/pattern-matching-ts/blob/master/docs/img/b.png?raw=true)
 
 and each implementation
-![alt MatchW](img/a.png)
+![alt MatchW](https://github.com/nrdlab/pattern-matching-ts/blob/master/docs/img/a.png?raw=true)
+
 
 
 ### Option MatchW
