@@ -23,14 +23,8 @@ This package aims to bring <strong>Pattern Matching</strong> feature to <strong>
 <a href="https://github.com/nrdlab/pattern-matching-ts/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/nrdlab/pattern-matching-ts?color=green&style=flat-square"></a>
 <a href="https://github.com/nrdlab/pattern-matching-ts/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/nrdlab/pattern-matching-ts?color=green&style=flat-square"></a>
   <a href="https://github.com/nrdlab/pattern-matching-ts/actions?query=workflow%3ACI">
-  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/nrdlab/pattern-matching-ts/CI?style=flat-square">
+  <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/nrdlab/pattern-matching-ts/CI?style=flat-square&color=green">
   <a>
-  <a href="https://www.npmjs.com/package/pattern-matching-ts">
-    <img src="https://badge.fury.io/js/ts-pattern.svg" alt="npm version" >
-  </a>
-  <a href="https://app.codecov.io/gh/nrdlab/pattern-matching-ts/branch/master">
-    <img src="https://img.shields.io/badge/coverage-100%25-brightgreen" >
-  </a>
 </p>
 
 <br />
@@ -240,7 +234,11 @@ assert.deepStrictEqual(
 assert.deepStrictEqual(matchMessage(Write({ text: 'my message' })), 'Text message: my message')
 ```
 
-Here's a blog post that introduces the API. 👉
-[Pattern Matching in Typescript](https://dev.to/stefano_regosa/typescript-pattern-matching-ne8)
+Blog posts that introduces the API.
+
+ 👉 [Pattern Matching in Typescript](https://dev.to/stefano_regosa/typescript-pattern-matching-ne8)
+
+ 👉 [Pipeable Pattern Matching in Typescript](https://dev.to/stefano_regosa/pipeable-pattern-matching-in-typescript-33dn)
+
 
 [MIT](/LICENSE.md)
