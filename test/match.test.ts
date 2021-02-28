@@ -30,17 +30,17 @@ describe('pattern matching', () => {
     None: () => 'Nothing'
   })
 
+  it('Option', () => {
+    assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
+    assert.deepStrictEqual(optionMatching(O.none), 'Nothing')
+  })
+
   type Cases = ChangeColor<number> | Move | Write
   const matchMessage = M.match<Cases, string>({
     ChangeColor: ({ value: { r, g, b } }) => `Change the color to Red: ${r} | Green: ${g} | Blue: ${b}`,
     Move: ({ value: { x, y } }) => `Move in the x direction: ${x} and in the y direction: ${y}`,
     Write: ({ value: { text } }) => `Text message: ${text}`,
     _: () => 'Default message'
-  })
-
-  it('Option', () => {
-    assert.deepStrictEqual(optionMatching(O.some('data')), 'Something: data')
-    assert.deepStrictEqual(optionMatching(O.none), 'Nothing')
   })
 
   it('match', () => {
