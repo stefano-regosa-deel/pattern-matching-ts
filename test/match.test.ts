@@ -43,7 +43,6 @@ describe('pattern matching', () => {
     _: () => 'Default message'
   })
 
-
   it('match', () => {
     const ChangeColor = ({ r, g, b }: ChangeColor<number>['value']): ChangeColor<number> => ({
       _tag: 'ChangeColor',
